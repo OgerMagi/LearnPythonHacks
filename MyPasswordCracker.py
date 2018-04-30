@@ -2,8 +2,8 @@ import crypt
 
 def testPass(cryptPass):
     salt = cryptPass[3:11]
-    dictfile = open('dictionary.txt', 'r')
-    cryptandsalt = '$6$' + salt
+    dictfile = open('dictionary.txt', 'r') # Dictionary and accounts.txt in the same directory as script
+    cryptandsalt = '$6$' + salt #$6$ == sha512
     for word in dictfile.readlines():
         cryptword = crypt.crypt(word.strip(), cryptandsalt)
         if cryptword == cryptPass:
@@ -13,7 +13,7 @@ def testPass(cryptPass):
 
 
 def getaccounts(): 
-    PFile = open('accounts.txt', 'r')
+    PFile = open('accounts.txt', 'r') #cat /etc/shadow > accounts.txt
     PasswordFile = PFile.readlines()
     Accounts = []
     for PLine in PasswordFile:
